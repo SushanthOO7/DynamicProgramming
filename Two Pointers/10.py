@@ -17,3 +17,24 @@ Expected Output:
 False
 You may delete at most one character.
 """
+def p(l, r):
+    while l < r:
+        if s[l] != s[r]:
+            return False
+        else:
+            r -= 1
+            l += 1
+    return True
+
+s = "abccbca"
+l = 0
+r = len(s) - 1
+flag = True
+while l < r:
+    if s[l] == s[r]:
+        l += 1
+        r -= 1
+    else:
+        flag = p(l + 1, r) or p(l, r - 1)
+        break
+print(flag)
