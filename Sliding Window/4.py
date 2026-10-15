@@ -24,20 +24,20 @@ Expected Output:
 """
 
 nums = [0,1,1,1,0,1,1,0,1]
-z = 0
 l = 0
-s = 0
+z = 0
+m = 0
 
 for r in range(len(nums)):
     if nums[r] == 0:
         z += 1
     while z > 1:
-        if nums[l] == 0:
-            z -= 1
+        z -= 1
         l += 1
-    s = max(s, r - l)
+    m = max(m, r - l)
 
-print(s)
+print(m)
+
 
 
 

@@ -18,15 +18,23 @@ prices = [7, 6, 4, 3, 1]
 Expected Output:
 0
 """
-p = [7, 1, 5, 3, 6, 4]
-c = 0
-l = 0
-r = 1
+# p = [7, 1, 5, 3, 6, 4]
+# c = 0
+# l = 0
+# r = 1
+#
+# while r < len(p):
+#     if p[l] < p[r]:
+#         c = max(c, p[r] - p[l])
+#     else:
+#         l = r
+#     r += 1
+# print(c)
 
-while r < len(p):
-    if p[l] < p[r]:
-        c = max(c, p[r] - p[l])
-    else:
-        l = r
-    r += 1
-print(c)
+p = [7, 1, 5, 3, 6, 4]
+l = float("inf")
+pr = 0
+for i in range(len(p)):
+    l = min(l, p[i])
+    pr = max(pr, p[i] - l)
+print(pr)

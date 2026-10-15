@@ -29,15 +29,16 @@ Expected Output:
 3
 """
 
-s = "pwwkew"
-a = set()
+s = "abcabcbb"
+c = set()
 l = 0
-r = 1
 m = 0
-for i in range(len(s)):
-    while s[i] in a:
-        a.remove(s[l])
+
+for r in range(len(s)):
+    while s[r] in c:
+        c.remove(s[l])
         l += 1
-    a.add(s[i])
-    m = max(m, i - l + 1)
+    m = max(m, r - l + 1)
+    c.add(s[r])
+
 print(m)
