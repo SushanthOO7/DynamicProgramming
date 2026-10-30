@@ -51,4 +51,27 @@ Since the strings contain lowercase English letters, at most 26 character counts
 s1 = "ab"
 s2 = "eidbaooo"
 
+n = len(s1)
+flag = False
+if len(s2) < n:
+    print(False)
+else:
+    c = {}
+    w = {}
+    for i in s1:
+        c[i] = c.get(i, 0) + 1
+    for i in range(n):
+        w[s2[i]] = w.get(s2[i], 0) + 1
+    if c == w:
+        flag = True
+    for r in range(n, len(s2)):
+        w[s2[r]] = w.get(s2[r], 0) + 1
+        o = s2[r - n]
+        w[o] -= 1
+        if w[o] == 0:
+            del w[o]
+        if w == c:
+            flag = True
+            break
+print(flag)
 
