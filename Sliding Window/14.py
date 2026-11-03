@@ -47,33 +47,30 @@ Aim for:
 Time:  O(n)
 Space: O(n)
 """
-
-nums = [10, 1, 2, 4, 7, 2]
-limit = 5
-max_ = float("-inf")
-min_ = float("inf")
+from collections import deque
+nums = [8, 2, 4, 7]
+limit = 4
+max_q = deque()
+min_q = deque()
 l = 0
 res = 0
-w = []
+
 for r in range(len(nums)):
-    w.append(nums[r])
-    if nums[r] > max_:
-        max_ = nums[r]
-    if nums[r] < min_:
-        min_ = nums[r]
-    d = max_ - min_
-    while d > limit and r != l:
-        if max_ == nums[l]:
-            w.remove(nums[l])
-            max_ = max(w)
-            d = max_ - min_
-        elif min_ == nums[l]:
-            w.remove(nums[l])
-            min_ = min(w)
-            d = max_ - min_
-        else:
-            w.remove(nums[l])
+
+    while max_q and nums[r] > nums[max_q[-1]]:
+        max_q.pop()
+    max_q.append(r)
+
+    while min_q and nums[r] < nums[min_q[-1]]:
+        min_q.pop()
+    min_q.append(r)
+
+    while nums[max_q[0]] - nums[min_q[0]] > limit:
+        if max_q[0] == l:
+            max_q.popleft()
+        if min_q[0] == l:
+            min_q.popleft()
         l += 1
-    if d <= limit:
-        res = max(res, r - l + 1)
+
+    res = max(res, r - l + 1)
 print(res)
