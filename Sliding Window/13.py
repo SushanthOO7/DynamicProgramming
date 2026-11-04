@@ -1,60 +1,86 @@
 """
 Sliding Window:
-Question 11 — Maximum Points You Can Obtain from Cards
-LeetCode #1423 — Medium
+Question 13 — Minimum Window Substring
+LeetCode #76 — Hard ⭐ Very important sliding-window problem
 Problem Description
-You are given an integer array cardPoints and an integer k.
-You must take exactly k cards.
-On each move, you may take a card only from the beginning or the end of the array.
-Return the maximum score you can obtain.
+Given two strings s and t, return the smallest substring of s that contains every character from t, including duplicates.
+If no such substring exists, return "".
 
 Example 1
 Input:
-cardPoints = [1, 2, 3, 4, 5, 6, 1]
-k = 3
+s = "ADOBECODEBANC"
+t = "ABC"
 
 Expected Output:
-12
-One optimal choice is taking the last three relevant end choices to get:
-1 from left + 6 from right + 5 from right = 12
+"BANC"
+"BANC" contains:
+A → 1
+B → 1
+C → 1
+and there is no smaller substring containing all three.
 
 Example 2
 Input:
-cardPoints = [2, 2, 2]
-k = 2
+s = "a"
+t = "a"
 
 Expected Output:
-4
+"a"
 
-Example 3
+Example 3 — Duplicates matter
 Input:
-cardPoints = [9, 7, 7, 9, 7, 7, 9]
-k = 7
+s = "AAABBC"
+t = "AABC"
 
 Expected Output:
-55
+"AABBC"
+
+Because t requires:
+A → 2
+B → 1
+C → 1
+So "ABBC" would not be valid because it only contains one A.
 
 Target Complexity
-Time: O(n)
-Space: O(1)
+Aim for:
+Time:  O(n)
+Space: O(number of distinct characters)
 """
 
-cardPoints = [1, 2, 3, 4, 5, 6, 1]
-k = 3
-n = len(cardPoints)
-m = float("inf")
-t = sum(cardPoints)
-s = 0
+s = "ADOBECODEBANC"
+t = "ABC"
 
-if n == k:
-    m = t
+w = {}
+n = {}
+
+for i in t:
+    n[i] = n.get(i, 0) + 1
+
+l = 0
+m = float("inf")
+need = len(n)
+h = 0
+st = 0
+
+for r in range(len(s)):
+    c = s[r]
+    w[c] = w.get(c, 0) + 1
+
+    if c in n and w[c] == n[c]:
+        h += 1
+
+    while h == need:
+        if (r - l + 1) < m:
+            m = r - l + 1
+            st = l
+
+        ch = s[l]
+        w[ch] -= 1
+
+        if ch in n and w[ch] < n[ch]:
+            h -= 1
+        l += 1
+if m == float("inf"):
+    print("")
 else:
-    w = n - k
-    s = sum(cardPoints[:w])
-    m = s
-    for r in range(w, len(cardPoints)):
-        s += cardPoints[r]
-        s -= cardPoints[r - w]
-        m = min(m, s)
-    m = t - m
-print(m)
+    print(s[st:st+m])

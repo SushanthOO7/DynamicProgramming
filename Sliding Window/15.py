@@ -2,7 +2,6 @@
 Sliding Window:
 Question 15 — Sliding Window Maximum
 LeetCode #239 — Hard ⭐ Important monotonic deque problem
-This is a perfect follow-up to Question 14 because you'll reuse the deque you just learned.
 Problem Description
 You are given an integer array nums and a fixed window size k.
 The window moves from left to right one position at a time.

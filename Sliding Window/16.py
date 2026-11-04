@@ -2,7 +2,6 @@
 Sliding Window:
 Question 16 — Frequency of the Most Frequent Element
 LeetCode #1838 — Medium
-This teaches a useful variation: sorting + sliding window.
 Problem Description
 You are given an integer array nums and an integer k.
 In one operation, you may choose an element and increase it by 1.

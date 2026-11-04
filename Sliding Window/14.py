@@ -2,8 +2,6 @@
 Sliding Window:
 Question 14 — Longest Subarray With Absolute Diff ≤ Limit
 LeetCode #1438 — Medium
-This introduces an important advanced sliding-window idea:
-maintaining the minimum and maximum values inside the current window.
 Problem Description
 Given an integer array nums and an integer limit, return the length of the longest contiguous subarray
 such that the absolute difference between any two elements in that subarray is less than or equal to limit.

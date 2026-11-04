@@ -1,71 +1,60 @@
 """
 Sliding Window:
-Question 10 — Fruit Into Baskets
-LeetCode #904 — Medium
+Question 11 — Maximum Points You Can Obtain from Cards
+LeetCode #1423 — Medium
 Problem Description
-You are given an integer array fruits, where fruits[i] represents the type of fruit at position i.
-
-You have two baskets. Each basket can hold only one type of fruit, but can hold unlimited fruit of that type.
-
-Starting from some position, you must pick one fruit from every consecutive tree until you encounter a fruit that cannot fit into either basket.
-
-Return the maximum number of fruits you can collect.
-
-In simpler terms:
-Find the longest contiguous subarray containing at most 2 distinct numbers.
+You are given an integer array cardPoints and an integer k.
+You must take exactly k cards.
+On each move, you may take a card only from the beginning or the end of the array.
+Return the maximum score you can obtain.
 
 Example 1
 Input:
-fruits = [1, 2, 1]
+cardPoints = [1, 2, 3, 4, 5, 6, 1]
+k = 3
 
 Expected Output:
-3
-The entire array contains only two types:
-1 and 2
+12
+One optimal choice is taking the last three relevant end choices to get:
+1 from left + 6 from right + 5 from right = 12
 
 Example 2
 Input:
-fruits = [0, 1, 2, 2]
-
-Expected Output:
-3
-
-The longest valid section is:
-[1, 2, 2]
-It contains only two fruit types.
-
-Example 3
-Input:
-fruits = [1, 2, 3, 2, 2]
+cardPoints = [2, 2, 2]
+k = 2
 
 Expected Output:
 4
-Longest valid window:
-[2, 3, 2, 2]
-Only fruit types 2 and 3.
+
+Example 3
+Input:
+cardPoints = [9, 7, 7, 9, 7, 7, 9]
+k = 7
+
+Expected Output:
+55
+
 Target Complexity
 Time: O(n)
-Space: O(1) relative to the two fruit types.
-Hint
-Think about Question 1 — Longest Substring Without Repeating Characters.
-Maintain a window:
-[1, 2, 3, 2, 2]
- ↑        ↑
- l        r
-
+Space: O(1)
 """
 
-fruits = [1, 2, 3, 2, 2]
-l = 0
-d = {}
-m = 0
-for r in range(len(fruits)):
-    d[fruits[r]] = d.get(fruits[r], 0) + 1
-    while len(d) > 2:
-        o = fruits[l]
-        d[o] -= 1
-        if d[o] == 0:
-            del d[o]
-        l += 1
-    m = max(m, r - l + 1)
+cardPoints = [1, 2, 3, 4, 5, 6, 1]
+k = 3
+n = len(cardPoints)
+m = float("inf")
+t = sum(cardPoints)
+s = 0
+
+if n == k:
+    m = t
+else:
+    w = n - k
+    s = sum(cardPoints[:w])
+    m = s
+    for r in range(w, len(cardPoints)):
+        s += cardPoints[r]
+        s -= cardPoints[r - w]
+        m = min(m, s)
+    m = t - m
 print(m)
