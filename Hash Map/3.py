@@ -1,45 +1,65 @@
 """
-Question 2 — Contains Duplicate
-LeetCode #217 — Easy
+Hash Map
+Question 3 — Valid Anagram
+LeetCode #242 — Easy ⭐ Common foundational problem
 Problem Description
-Given an integer array nums, return True if any value appears at least twice.
-Return False if every element is unique.
-
+Given two strings s and t, return True if t is an anagram of s. Otherwise return False.
+An anagram contains exactly the same characters with exactly the same frequencies,
+but the characters may be in a different order.
 Example 1
 Input:
-nums = [1, 2, 3, 1]
+s = "anagram"
+t = "nagaram"
 
 Expected Output:
 True
-Because 1 appears twice.
+Both contain:
+a → 3
+n → 1
+g → 1
+r → 1
+m → 1
 
 Example 2
 Input:
-nums = [1, 2, 3, 4]
+s = "rat"
+t = "car"
 
 Expected Output:
 False
-Every number is unique.
 
 Example 3
 Input:
-nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+s = "aacc"
+t = "ccac"
 
 Expected Output:
-True
+False
+The frequencies differ:
+s: a=2, c=2
+t: a=1, c=3
 
 Target Complexity
 Time:  O(n)
-Space: O(n)
+Space: O(1)
 """
 
-nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+s = "anagram"
+t = "nagaram"
 
-s = set()
-flag = False
-for i in nums:
-    if i in s:
-        flag = True
-        break
-    s.add(i)
-print(flag)
+if len(s) != len(t):
+    print(False)
+else:
+    c = {}
+    for i in s:
+        c[i] = c.get(i, 0) + 1
+    for i in t:
+        if i not in c:
+            print(False)
+            break
+        c[i] -= 1
+        if c[i] < 0:
+            print(False)
+            break
+    else:
+        print(True)
