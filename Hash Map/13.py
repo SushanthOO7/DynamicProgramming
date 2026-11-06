@@ -35,3 +35,19 @@ Target Complexity
 Time: O(n)
 Space: O(n)
 """
+
+nums = [0, 0, 1, 0, 0, 0, 1, 1]
+
+d = {0: -1}
+p = 0
+m = 0
+for i, num in enumerate(nums):
+    if num == 0:
+        p -= 1
+    else:
+        p += 1
+    if p in d:
+        m = max(m, i - d[p])
+    else:
+        d[p] = i
+print(m)
