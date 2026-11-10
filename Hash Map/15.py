@@ -44,3 +44,23 @@ Aim for:
 Time:  O(n²)
 Space: O(n²)
 """
+
+nums1 = [1, 2]
+nums2 = [-2, -1]
+nums3 = [-1, 2]
+nums4 = [0, 2]
+
+need_d = {}
+res = 0
+
+for a in nums1:
+    for b in nums2:
+        s = a + b
+        need_d[s] = need_d.get(s, 0) + 1
+
+for c in nums3:
+    for d in nums4:
+        need = -(c + d)
+        if need in need_d:
+            res += need_d[need]
+print(res)
