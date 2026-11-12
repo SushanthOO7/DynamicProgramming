@@ -17,8 +17,7 @@ wall = [
     [1, 3, 2],
     [2, 4],
     [3, 1, 2],
-    [1, 3, 1, 1]
-    ]
+    [1, 3, 1, 1]]
 
 Expected Output:
 2
@@ -45,3 +44,23 @@ If the total number of bricks across the wall is B:
 Time: O(B)
 Space: O(B)
 """
+
+wall = [
+    [1, 2, 2, 1],
+    [3, 1, 2],
+    [1, 3, 2],
+    [2, 4],
+    [3, 1, 2],
+    [1, 3, 1, 1]]
+
+d = {}
+total_r = len(wall)
+m = 0
+for r in wall:
+    s = 0
+    for b in range(len(r) - 1):
+        s += r[b]
+        d[s] = d.get(s, 0) + 1
+for i in d:
+    m = max(m, d[i])
+print(total_r - m)
